@@ -37,6 +37,187 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/deleteUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8afa85fd-316c-4185-810d-6919cd74942a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"删除用户失败,需确认该用户是否存在\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":19\n\t\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/deleteUser",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"deleteUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/updateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\":6,\n  \"username\":\"hahaha4\",\n  \"password\":\"654321\",\n  \"age\":19,\n  \"name\":\"高佳旭4\",\n  \"sex\":1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/updateUser",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"updateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec337a4e-e5b4-4338-8cd2-eb3d3706fc63",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"注册成功\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"hahaha5\",\n  \"password\":\"654321\",\n  \"age\":19,\n  \"name\":\"高佳旭9\",\n  \"sex\":1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b808b54e-fb82-4fe0-9768-6363b4d7a679",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"evanjin\",\n  \"password\":\"654321\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
