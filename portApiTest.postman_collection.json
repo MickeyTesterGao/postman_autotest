@@ -7,6 +7,24 @@
 	"item": [
 		{
 			"name": "http://127.0.0.1:8080/queryUserAll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47211dff-e23a-486b-b324-e1c12361aa57",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    //pm.expect(jsonData.value).to.eql(100);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,7 +37,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\":12,\n  \"username\":\"jjj\",\n  \"password\":\"9999321\",\n  \"age\":2022,\n  \"sex\":12,\n  \"name\":\"enen\"\n}"
+					"raw": ""
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8080/queryUserAll",
@@ -172,16 +190,24 @@
 			"response": []
 		},
 		{
-			"name": "http://127.0.0.1:8080/login",
+			"name": "http://127.0.0.1:8080/queryUserById",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "b808b54e-fb82-4fe0-9768-6363b4d7a679",
+						"id": "d31117a4-5702-451e-909f-16d07a9bb34c",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
+							"pm.test(\"获取用户名和密码\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    //pm.globals.set(\"userName\", jsonData.username);",
+							"    pm.environment.set(\"userName\", jsonData.username);",
+							"    //pm.globals.set(\"passWord\", jsonData.password);",
+							"    pm.environment.set(\"passWord\", jsonData.password);",
+							"});",
+							"",
 							""
 						],
 						"type": "text/javascript"
@@ -200,7 +226,67 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\":\"evanjin\",\n  \"password\":\"654321\"\n}\n\n"
+					"raw": "{\n\t\"id\":1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/queryUserById",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"queryUserById"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b808b54e-fb82-4fe0-9768-6363b4d7a679",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"登录成功\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7d14e2c7-9201-4031-a80d-590dab278320",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"{{userName}}\",\n  \"password\":\"{{passWord}}\"\n}\n\n"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8080/login",
